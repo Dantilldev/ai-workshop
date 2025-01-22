@@ -1,4 +1,4 @@
-import {Geist, Geist_Mono} from 'next/font/google';
+import { Geist, Geist_Mono } from 'next/font/google';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -11,5 +11,9 @@ const geistMono = Geist_Mono({
 });
 
 export default function Home() {
-  return <div>Home</div>;
+  return (
+    <div>
+      <p>Hellow world</p>
+    </div>
+  );
 }
