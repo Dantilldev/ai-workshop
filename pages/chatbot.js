@@ -1,9 +1,18 @@
+import CustomIcon from '@/src/components/ChatBotIcon';
 import LoadingDots from '@/src/components/LoadingDots';
 import { fetchGeminiReply } from '@/src/lib/geminiApi';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
+const defaultMessages = [
+  {
+    role: 'ai',
+    content:
+      'Hej! Jag är din AI-assisterade chattbo, hur kan jag hjälpa dig idag?',
+  },
+];
+
 export default function Chatbot() {
-  const [messages, setMessages] = useState([]),
+  const [messages, setMessages] = useState(defaultMessages),
     [userInput, setUserInput] = useState(''),
     [isTyping, setIsTyping] = useState(false),
     chatContainerRef = useRef(null);
@@ -12,6 +21,7 @@ export default function Chatbot() {
     if (!userInput.trim()) return;
 
     setMessages((prev) => [...prev, { role: 'user', content: userInput }]);
+    setUserInput('');
     setIsTyping(true);
 
     try {
@@ -26,7 +36,6 @@ export default function Chatbot() {
       ]);
     } finally {
       setIsTyping(false);
-      setUserInput('');
     }
   }, [userInput]);
 
@@ -48,26 +57,39 @@ export default function Chatbot() {
       });
     }
   }, [messages, isTyping]);
+
   return (
-    <div className='min-h-screen flex flex-col items-center justify-center px-2'>
-      <div className='w-full max-w-md p-4 bg-slate-800 shadow-lg rounded-lg'>
-        <h1 className='text-2xl font-bold text-center mb-4'>AI Chatbot</h1>
+    <div className='flex flex-col items-center justify-center px-2'>
+      <div className='w-full max-w-md p-4 mt-6 bg-gray-50 shadow-lg rounded-lg '>
+        <div className='flex  gap-5 px-3'>
+          <CustomIcon />
+          <h1 className='text-2xl font-bold text-center mb-4 text-slate-800'>
+            AI-assisterad Chatbot
+          </h1>
+        </div>
         <div
-          className='h-64 overflow-y-auto border p-2 mb-4 relative'
+          className='h-80 overflow-y-auto border p-2 mb-4 relative'
           ref={chatContainerRef}
         >
           {messages.map((msg, idx) => (
             <div
               key={idx}
-              className={`mb-2 ${
-                msg.role === 'user'
-                  ? 'text-right text-blue-500'
-                  : 'text-left text-white'
+              className={`mb-4 flex ${
+                msg.role === 'user' ? 'justify-end' : 'justify-start'
               }`}
             >
-              <p>{msg.content}</p>
+              <div
+                className={`max-w-sm p-3 rounded-lg shadow-md ${
+                  msg.role === 'user'
+                    ? 'bg-blue-500 text-white rounded-tr-none'
+                    : 'bg-gray-800 text-gray-100 rounded-tl-none'
+                }`}
+              >
+                <p>{msg.content}</p>
+              </div>
             </div>
           ))}
+
           {isTyping && (
             <div className='absolute bottom-2 left-2'>
               <LoadingDots />
@@ -79,8 +101,8 @@ export default function Chatbot() {
             type='text'
             value={userInput}
             onChange={(e) => setUserInput(e.target.value)}
-            className='flex-grow border p-2 rounded-l-md bg-slate-900'
-            placeholder='Ask me anything...'
+            className='flex-grow border p-2 rounded-l-md text-black'
+            placeholder='Fråga mig vad som helst...'
             onKeyDown={handleKeyDown}
           />
           <button
