@@ -9,7 +9,7 @@ import { useState } from "react";
 // const genAI = new GoogleGenerativeAI(apiKey);
 // const models = genAI.getGenerativeModel({ models: "gemini-1.5-flash" });
 
-export default function AI_Travel() {
+export default function AiTravel() {
     const [city, setCity] = useState(""); 
     const [days, setDays] = useState(""); 
     const [travelPlan, setTravelPlan] = useState("");
@@ -20,7 +20,7 @@ export default function AI_Travel() {
     const handleGeneratePlan = async () => {
         try {
             const prompt = `Create a detailed ${days}-day travel plan for ${city}. 
-            Provide your response as a list, with no additional text or commentary before or after that.`;
+            Provide your response as a list, with no additional text or commentary before or after that. Give me in the json format`;
             if (!prompt || typeof prompt !== 'string') {
                 throw new Error("Invalid prompt");
             }
