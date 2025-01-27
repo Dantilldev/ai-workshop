@@ -1,26 +1,18 @@
 import { model } from "@/utils/ai";
-
-// import { GoogleGenerativeAI } from "@google/generative-ai";
-import React from 'react';
-import { useState } from "react";
-
-// Initialize Gemini API
-// const apiKey = process.env.NEXT_PUBLIC_GEMINI_API;
-// const genAI = new GoogleGenerativeAI(apiKey);
-// const models = genAI.getGenerativeModel({ models: "gemini-1.5-flash" });
+import React, { useState } from "react";
 
 export default function AiTravel() {
     const [city, setCity] = useState(""); 
     const [days, setDays] = useState(""); 
     const [travelPlan, setTravelPlan] = useState("");
-    const [phrase, setPhrase] = useState(""); // Phrase to translate
+    // const [phrase, setPhrase] = useState(""); // Phrase to translate
     const [translatedPhrase, setTranslatedPhrase] = useState("");
 
     // Function to fetch travel plan
     const handleGeneratePlan = async () => {
         try {
             const prompt = `Create a detailed ${days}-day travel plan for ${city}. 
-            Provide your response as a list, with no additional text or commentary before or after that. Give me in the json format`;
+            Provide your response as a list, with no additional text or commentary before or after that.`; // Give me in the json format
             if (!prompt || typeof prompt !== 'string') {
                 throw new Error("Invalid prompt");
             }
@@ -33,22 +25,22 @@ export default function AiTravel() {
         }
 };
 
-// Function to fetch translations
+// Function to fetch Phrases
 const handleTranslatePhrase = async () => {
     try {
-        const prompt = `List 50 common words that a tourist would use in the selected ${city}.`
-        console.log(prompt)
+        const prompt = `List 50 common words that a tourist would use in the selected ${city}. ` //Provide the response in JSON format as [{ "phrase": <string> }].
+        // console.log(prompt)
         const result = await model.generateContent(prompt);
         console.log("response", result.response.text());
         setTranslatedPhrase(result.response.text());
     } catch (error) {
         console.error("Error generating translation:", error);
-        setTranslatedPhrase("An error occurred while generating the translation.");
+        setTranslatedPhrase("Failed to load phrases.");
     }
 };
 
 return (
-    <div className="p-8 font-sans bg-gray-50 min-h-screen">
+    <div className="p-8 font-sans bg-gray-50 min-h-screen rounded-md shadow-md leading-loose">
         <h1 className="text-3xl font-bold mb-6">AI Travel Guide</h1>
         
         {/* Travel Plan Section */}
@@ -81,6 +73,7 @@ return (
                     <h3 className="text-lg font-semibold mb-2">Generated Travel Plan:</h3>
                     <div className="prose max-w-none">
                         <p>{travelPlan}</p>
+                        
                     </div>
                 </div>
             )}
@@ -90,7 +83,7 @@ return (
 
         {/* Local Language Helper Section */}
         <div>
-            <h2 className="text-xl font-semibold mb-4">Local Language Helper</h2>
+            <h2 className="text-xl font-semibold mb-4 shadow-md rounded-md">Local Language Helper</h2>
             <div className="flex items-center gap-4 mb-4">
                 <button
                     onClick={handleTranslatePhrase}
