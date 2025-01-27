@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 export default function Card({image, title, description, link}) {
   return (
-    <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow-xl dark:bg-gray-800 dark:border-gray-700 hover:opacity-90">
+    <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow-xl dark:bg-gray-800 dark:border-gray-700  transition-all duration-300 hover:scale-105 hover:shadow-2xl">
       <Link href={link}>
         <div>
           <img className="rounded-t-lg w-full h-60 " src={image} alt={title} />
