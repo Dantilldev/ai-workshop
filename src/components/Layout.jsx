@@ -31,11 +31,25 @@ export default function Layout({ children }) {
             >
               Translator
             </Link>
+<<<<<<< HEAD
             <Link className="hover:rounded hover:bg-slate-300 p-2 " href={"/"}>
               Ali
             </Link>
             <Link className="hover:rounded hover:bg-slate-300 p-2 " href={"/"}>
               Shabbo
+=======
+            <Link
+              className="hover:rounded hover:bg-slate-300 p-2 "
+              href={"/aiquiz"}
+            >
+              Quiz
+            </Link>
+            <Link
+              className="hover:rounded hover:bg-slate-300 p-2 "
+              href={"/ai-travel"}
+            >
+              Travels
+>>>>>>> ali
             </Link>
             <Link className="hover:rounded hover:bg-slate-300 p-2 " href={"/"}>
               Justus

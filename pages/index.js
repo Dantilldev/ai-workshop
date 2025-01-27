@@ -19,14 +19,14 @@ export default function Home() {
     {
       image: '/quiz-image.jpg',
       title: 'Quiz by Ali',
-      description: 'text',
-      link: '/',
+      description: 'Test your knowledge and have fun with challenging questions. Get started by selecting a quiz topic!',
+      link: '/aiquiz',
     },
     {
       image: '/travel-image.jpg',
       title: 'Travel Guidance by Shabbo',
-      description: 'text',
-      link: '/',
+      description: 'AI-powered travel guide for plans and translations',
+      link: '/ai-travel',
     },
     {
       image: '/movieRecommendation-image.jpg',
