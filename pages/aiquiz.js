@@ -78,7 +78,7 @@ export default function AiGame() {
   };
 
   return (
-    <div className="min-h-screen flex justify-center bg-white py-10">
+    <div className="min-h-screen flex justify-center py-10">
       <div className="bg-gray-50 max-w-lg w-full p-16 rounded-lg shadow-xl relative">
         <div className="flex justify-center gap-4">
           <CustomIcon />
