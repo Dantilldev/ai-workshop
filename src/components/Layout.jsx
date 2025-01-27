@@ -43,8 +43,8 @@ export default function Layout({ children }) {
             >
               Travels
             </Link>
-            <Link className="hover:rounded hover:bg-slate-300 p-2 " href={"/"}>
-              Justus
+            <Link className="hover:rounded hover:bg-slate-300 p-2 " href={"/movie-recs"}>
+              Movie Recommendations
             </Link>
             <Link className="hover:rounded hover:bg-slate-300 p-2 " href={"/"}>
               Sumiyabazar
