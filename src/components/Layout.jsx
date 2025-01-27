@@ -1,14 +1,14 @@
-import React from 'react';
-import Link from 'next/link';
-import {Poppins} from 'next/font/google';
+import React from "react";
+import Link from "next/link";
+import { Poppins } from "next/font/google";
 
 const poppins = Poppins({
-  subsets: ['latin'],
-  weight: ['400', '500'],
-  display: 'swap',
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  display: "swap",
 });
 
-export default function Layout({children}) {
+export default function Layout({ children }) {
   return (
     <>
       <header>
@@ -16,31 +16,31 @@ export default function Layout({children}) {
           <ul
             className={`${poppins.className} flex justify-center flex-wrap  p-4 mb-6 font-semibold text-black `}
           >
-            <Link className="hover:rounded hover:bg-slate-300 p-2 " href={'/'}>
+            <Link className="hover:rounded hover:bg-slate-300 p-2 " href={"/"}>
               Home
             </Link>
             <Link
               className="hover:rounded hover:bg-slate-300 p-2 "
-              href={'/chatbot'}
+              href={"/chatbot"}
             >
               Chatbot
             </Link>
             <Link
               className="hover:rounded hover:bg-slate-300 p-2 "
-              href={'/translator'}
+              href={"/translator"}
             >
               Translator
             </Link>
-            <Link className="hover:rounded hover:bg-slate-300 p-2 " href={'/'}>
+            <Link className="hover:rounded hover:bg-slate-300 p-2 " href={"/"}>
               Ali
             </Link>
-            <Link className="hover:rounded hover:bg-slate-300 p-2 " href={'/'}>
+            <Link className="hover:rounded hover:bg-slate-300 p-2 " href={"/"}>
               Shabbo
             </Link>
-            <Link className="hover:rounded hover:bg-slate-300 p-2 " href={'/'}>
+            <Link className="hover:rounded hover:bg-slate-300 p-2 " href={"/"}>
               Justus
             </Link>
-            <Link className="hover:rounded hover:bg-slate-300 p-2 " href={'/'}>
+            <Link className="hover:rounded hover:bg-slate-300 p-2 " href={"/"}>
               Sumiyabazar
             </Link>
           </ul>
