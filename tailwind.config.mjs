@@ -1,3 +1,4 @@
+const flowbite = require('flowbite-react/tailwind');
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
@@ -5,6 +6,7 @@ export default {
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
     './src/**/*.{js,ts,jsx,tsx,mdx}',
+    flowbite.content(),
   ],
   theme: {
     extend: {
@@ -13,8 +15,8 @@ export default {
       },
       keyframes: {
         'custom-bounce': {
-          '0%, 100%': { transform: 'translateY(0)' },
-          '50%': { transform: 'translateY(-0.5rem)' },
+          '0%, 100%': {transform: 'translateY(0)'},
+          '50%': {transform: 'translateY(-0.5rem)'},
         },
       },
       spacing: {
@@ -27,5 +29,5 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [flowbite.plugin()],
 };
