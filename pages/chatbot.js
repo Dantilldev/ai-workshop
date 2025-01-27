@@ -2,12 +2,12 @@ import CustomIcon from '@/src/components/ChatBotIcon';
 import LoadingDots from '@/src/components/LoadingDots';
 import { fetchGeminiReply } from '@/src/lib/geminiApi';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { motion } from 'framer-motion';
 
 const defaultMessages = [
   {
     role: 'ai',
-    content:
-      'Hej! Jag är din AI-assisterade chattbo, hur kan jag hjälpa dig idag?',
+    content: '🤖 Hi!, I am your AI-assisted chatbot, how can I help you today?',
   },
 ];
 
@@ -59,21 +59,28 @@ export default function Chatbot() {
   }, [messages, isTyping]);
 
   return (
-    <div className='flex flex-col items-center justify-center px-2'>
-      <div className='w-full max-w-md p-4 mt-6 bg-gray-50 shadow-lg rounded-lg '>
+    <motion.div
+      initial={{ scale: 0 }}
+      animate={{ scale: 1 }}
+      className='flex flex-col items-center justify-center px-2'
+    >
+      <div className='w-full max-w-md sm:max-w-sm p-4 mt-6 bg-gray-50 shadow-lg rounded-lg '>
         <div className='flex  gap-5 px-3'>
           <CustomIcon />
           <h1 className='text-2xl font-bold text-center mb-4 text-slate-800'>
-            AI-assisterad Chatbot
+            AI-Assisted Chatbot
           </h1>
         </div>
         <div
-          className='h-80 overflow-y-auto border p-2 mb-4 relative'
+          className='h-80 overflow-y-auto border p-2 mb-4 relative flex flex-col justify-between'
           ref={chatContainerRef}
         >
           {messages.map((msg, idx) => (
-            <div
+            <motion.div
               key={idx}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3 }}
               className={`mb-4 flex ${
                 msg.role === 'user' ? 'justify-end' : 'justify-start'
               }`}
@@ -86,13 +93,19 @@ export default function Chatbot() {
                 }`}
               >
                 <p>{msg.content}</p>
+                <div className='text-xs text-gray-400 mt-1'>
+                  {new Date().toLocaleTimeString()}
+                </div>
               </div>
-            </div>
+            </motion.div>
           ))}
 
           {isTyping && (
-            <div className='absolute bottom-2 left-2'>
-              <LoadingDots />
+            <div className='flex items-center gap-2'>
+              <CustomIcon />
+              <div className='p-2 text-gray-100 rounded-lg'>
+                <LoadingDots />
+              </div>
             </div>
           )}
         </div>
@@ -102,17 +115,19 @@ export default function Chatbot() {
             value={userInput}
             onChange={(e) => setUserInput(e.target.value)}
             className='flex-grow border p-2 rounded-l-md text-black'
-            placeholder='Fråga mig vad som helst...'
+            placeholder='Ask me anything...'
             onKeyDown={handleKeyDown}
           />
-          <button
+          <motion.button
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
             onClick={handleSend}
-            className='bg-blue-500 text-white px-4 py-2 rounded-r-md hover:bg-blue-600'
+            className='bg-blue-500 text-white px-4 py-2 rounded-r-md'
           >
             Send
-          </button>
+          </motion.button>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
