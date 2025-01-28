@@ -20,7 +20,7 @@ export default function AiGame() {
   };
   // får rätta svaren from api/ai
   const generateQuestion = async () => {
-    const fullPrompt = `Generate a simple true/false statement about ${quizTopic}, don't explain and provide only false.`;
+    const fullPrompt = `Generate a simple true/false statement about ${quizTopic}, don't explain/dont show answer and provide only false answers.`;
 
     try {
       const result = await model.generateContent(fullPrompt);
