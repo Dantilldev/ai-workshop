@@ -1,45 +1,45 @@
-import { useState } from "react";
-import { model } from "@/util/aigame";
-import CustomIcon from "@/src/components/ChatBotIcon";
-import { Reset } from "@radix-ui/themes";
+import {useState} from 'react';
+import {model} from '@/util/aigame';
+import CustomIcon from '@/src/components/ChatBotIcon';
+import {Reset} from '@radix-ui/themes';
 
 export default function AiGame() {
   const [gameStarted, setGameStarted] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState(null);
   const [questionIndex, setQuestionIndex] = useState(0);
   const [score, setScore] = useState(0);
-  const [quizTopic, setQuizTopic] = useState("Geography");
-  const [answerFeedback, setAnswerFeedback] = useState("");
+  const [quizTopic, setQuizTopic] = useState('Geography');
+  const [answerFeedback, setAnswerFeedback] = useState('');
 
   const startGame = async () => {
     setGameStarted(true);
     setScore(0);
     setQuestionIndex(0);
-    setAnswerFeedback("");
+    setAnswerFeedback('');
     await generateQuestion();
   };
   // får rätta svaren from api/ai
   const generateQuestion = async () => {
-    const fullPrompt = `Generate a simple true/false statement about ${quizTopic} and don't show the answer`;
+    const fullPrompt = `Generate a simple true/false statement about ${quizTopic}, don't explain and provide only false and dont show answer.`;
 
     try {
       const result = await model.generateContent(fullPrompt);
 
       const questionText = result.response.text();
-      const correctAnswer = result.correctAnswer ? "True" : "False";
+      const correctAnswer = result.correctAnswer ? 'True' : 'False';
 
-      console.log("Generated Correct Answer:", correctAnswer);
-      console.log("Generated Question:", questionText);
+      console.log('Generated Correct Answer:', correctAnswer);
+      console.log('Generated Question:', questionText);
 
       setCurrentQuestion({
         question: questionText,
         correctAnswer: correctAnswer,
-        feedback: "",
+        feedback: '',
       });
     } catch (error) {
-      console.error("Error generating content:", error);
+      console.error('Error generating content:', error);
       setCurrentQuestion({
-        question: "Sorry, something went wrong.",
+        question: 'Sorry, something went wrong.',
         correctAnswer: null,
       });
     }
@@ -54,22 +54,22 @@ export default function AiGame() {
     const isCorrect = trimmedAnswer === trimmedCorrectAnswer;
 
     console.log("User's Answer:", trimmedAnswer);
-    console.log("Expected Answer:", trimmedCorrectAnswer);
-    console.log("Is Correct:", isCorrect);
+    console.log('Expected Answer:', trimmedCorrectAnswer);
+    console.log('Is Correct:', isCorrect);
 
     if (isCorrect) {
       setScore(score + 1);
-      setAnswerFeedback("Correct!");
+      setAnswerFeedback('Correct!');
     } else {
-      setAnswerFeedback("Wrong!");
+      setAnswerFeedback('Wrong!');
     }
 
     const nextIndex = questionIndex + 1;
     setQuestionIndex(nextIndex);
 
-    if (nextIndex < 8) {
+    if (nextIndex < 3) {
       setTimeout(() => {
-        setAnswerFeedback("");
+        setAnswerFeedback('');
         generateQuestion();
       }, 1000);
     } else {
@@ -113,13 +113,13 @@ export default function AiGame() {
 
                 <div className="flex flex-col gap-6 mt-6 sm:w-full">
                   <button
-                    onClick={() => handleAnswer("True")}
+                    onClick={() => handleAnswer('True')}
                     className="bg-green-500 text-white py-3 px-8 rounded-full shadow-lg hover:bg-green-600 transition duration-300 w-full sm:w-auto"
                   >
                     True
                   </button>
                   <button
-                    onClick={() => handleAnswer("False")}
+                    onClick={() => handleAnswer('False')}
                     className="bg-red-500 text-white py-3 px-8 rounded-full shadow-lg hover:bg-red-600 transition duration-300 w-full sm:w-auto"
                   >
                     False
@@ -129,9 +129,9 @@ export default function AiGame() {
                 {answerFeedback && (
                   <div
                     className={`text-center mt-4 ${
-                      answerFeedback === "Correct!"
-                        ? "text-green-500"
-                        : "text-red-500"
+                      answerFeedback === 'Correct!'
+                        ? 'text-green-500'
+                        : 'text-red-500'
                     }`}
                   >
                     <p className="text-lg">
