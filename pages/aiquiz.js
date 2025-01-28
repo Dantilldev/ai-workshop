@@ -67,7 +67,7 @@ export default function AiGame() {
     const nextIndex = questionIndex + 1;
     setQuestionIndex(nextIndex);
 
-    if (nextIndex < 8) {
+    if (nextIndex < 1) {
       setTimeout(() => {
         setAnswerFeedback("");
         generateQuestion();
