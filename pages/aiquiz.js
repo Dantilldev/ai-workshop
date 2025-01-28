@@ -20,7 +20,7 @@ export default function AiGame() {
   };
   // får rätta svaren from api/ai
   const generateQuestion = async () => {
-    const fullPrompt = `Generate a simple true/false statement about ${quizTopic} and don't show the answer`;
+    const fullPrompt = `Generate a simple true/false statement about ${quizTopic}, don't explain and provide only false.`;
 
     try {
       const result = await model.generateContent(fullPrompt);
@@ -67,7 +67,7 @@ export default function AiGame() {
     const nextIndex = questionIndex + 1;
     setQuestionIndex(nextIndex);
 
-    if (nextIndex < 1) {
+    if (nextIndex < 3) {
       setTimeout(() => {
         setAnswerFeedback("");
         generateQuestion();
@@ -143,7 +143,7 @@ export default function AiGame() {
               </>
             ) : (
               <div className="flex flex-col items-center">
-                {questionIndex >= 5 && (
+                {questionIndex >= 3 && (
                   <div>
                     <div className="bg-gray-200 p-4 rounded-lg shadow-md text-center">
                       <h3 className="text-2xl font-semibold text-gray-700">
