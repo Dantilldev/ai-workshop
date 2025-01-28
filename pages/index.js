@@ -30,9 +30,9 @@ export default function Home() {
     },
     {
       image: '/movieRecommendation-image.jpg',
-      title: 'Movie Recommendation by Justus',
-      description: 'text',
-      link: '/',
+      title: 'Movie Recommendations',
+      description: 'An AI movie recommendation app that suggests movies based on genre',
+      link: '/movie-recs',
     },
     {
       image: '/',
